@@ -1,0 +1,53 @@
+.star {
+    position: relative;
+    display: block;
+    color: gold;
+    width: 0px;
+    height: 0px;
+    border-right: 10px solid transparent;
+    border-bottom: 7px solid gold;
+    border-left: 10px solid transparent;
+    transform: rotate(35deg);
+}
+
+.star:before {
+    border-bottom: 8px solid gold;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -5px;
+    left: -7px;
+    display: block;
+    content: '';
+    transform: rotate(-35deg);
+}
+
+.star:after {
+    position: absolute;
+    display: block;
+    color: gold;
+    top: 0px;
+    left: -10px;
+    width: 0px;
+    height: 0px;
+    border-right: 10px solid transparent;
+    border-bottom: 7px solid gold;
+    border-left: 10px solid transparent;
+    transform: rotate(-70deg);
+    content: '';
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.star {
+    animation: blink 1s ease-in-out;
+}

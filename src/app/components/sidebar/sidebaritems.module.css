@@ -1,0 +1,10 @@
+.menus {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 1em;
+}
+
+.menus li span {
+    text-shadow: none;
+}

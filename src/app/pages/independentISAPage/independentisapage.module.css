@@ -1,0 +1,19 @@
+.iisa_wrapper {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.iisa_dropdown {
+    align-self: flex-start;
+}
+
+.in_card_button_wrapper {
+    align-self: flex-end;
+}
+
+.in_card_button {
+    background-color: var(--primary-100) !important;
+    color: white !important;
+    font-weight: 600 !important;
+}

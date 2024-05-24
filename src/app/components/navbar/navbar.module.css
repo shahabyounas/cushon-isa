@@ -1,0 +1,41 @@
+.navbar {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-100);
+    color: white;
+    box-shadow: var(--card-box-shadow-1);
+}
+
+.navbar_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 0.25em 1em;
+}
+
+.navbar_logo {
+    padding: 0 1rem;
+    margin-top: .25em;
+}
+.nav_items {
+    list-style-type: none;
+}
+
+.nav_item {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 2em;
+    font-size: medium;
+    font-weight: bold;
+    background-color: azure;
+    color: var(--primary-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
