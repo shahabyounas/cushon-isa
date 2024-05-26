@@ -1,0 +1,4 @@
+.modal {
+    border: none;
+    border-radius: var(--border-radius-sm);
+}

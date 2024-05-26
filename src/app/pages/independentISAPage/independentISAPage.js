@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify'
 import Card from "../../components/card/Card";
 import Toast from "../../components/toast";
 import Container from "../../components/container";
+import PaymentConfirmModal from "../../components/modal/PaymentConfirmModal";
 import { SearchDropDown } from "../../components/dropdown";
+import Modal from "../../components/modal";
 import styles from "./independentisapage.module.css";
 
 
@@ -14,7 +16,25 @@ const FUND_ALREADY_SELECTED = "Please choose a different fund"
 
 function IndependentISAPage() {
   const [funds, setFunds] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [formData, setFormData] = useState({ amount: 0, fund: null})
+  function handleOpenModal(){
+    setIsModalOpen(true)
+  }
 
+  function handleCloseModal(){
+    setIsModalOpen(false)
+  }
+
+  function onConfirm(data){
+    console.log("confirm===")
+  }
+
+  function handleFormChange(e){
+    e.preventDefault()
+
+    setFormData(pre => ({ ...pre, [e.target.name] : e.target.value }))
+  }
 
 
   function handleFundsUpdate(fund) {
@@ -28,13 +48,19 @@ function IndependentISAPage() {
       return
     }
 
+    setFormData(pre => ({ ...pre, fund }))
     setFunds([fund])
   }
 
-
-
   return (
     <Container>
+      <Modal 
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={onConfirm}
+        >
+          <PaymentConfirmModal amount={formData.amount} />
+      </Modal>
       <Toast />
       <Card>
         <div className={styles.iisa_wrapper}>
@@ -65,17 +91,19 @@ function IndependentISAPage() {
                 Amount
               </label>
               <input
-                type="email"
+                type="number"
                 className="form-control"
                 id="amount"
+                name="amount"
                 placeholder="£25.00"
+                onChange={handleFormChange}
               />
             </div>
 
           <div className="align-self-end mt-3">
           <div className={styles.in_card_button_wrapper}>
             <Link>
-              <button type="button" className={`btn ${styles.in_card_button}`}>
+              <button type="button" onClick={handleOpenModal} className={`btn ${styles.in_card_button}`}>
                 Confirm Payment
               </button>
             </Link>

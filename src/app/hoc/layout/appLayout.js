@@ -7,7 +7,7 @@ function AppLayout({ children }) {
       <header>
         <Navbar />
       </header>
-      <main style={{ display: 'flex' }}>
+      <main style={{ display: 'flex', flexWrap: 'wrap' }}>
         <section style={{ flex: 15 }}>
           <SideBar />
         </section>
