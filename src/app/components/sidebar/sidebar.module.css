@@ -1,11 +1,15 @@
 .sidebar {
-    /* position: fixed; */
     background-color: var(--bg-color-100);
     padding: 0 2em;
     height: 100dvh;
-
-    @media (width <= 600px) {
-        height: fit-content;
-      }
       
+}
+
+
+@media(width <= 600px) {
+
+  .sidebar {
+    height: fit-content;
+  }
+
 }

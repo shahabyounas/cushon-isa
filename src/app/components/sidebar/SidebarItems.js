@@ -1,19 +1,20 @@
+import { Link } from "react-router-dom";
 import styles from "./sidebaritems.module.css";
 function SidebarItems() {
   const menus = [
     {
       name: "Investment plans",
-      path: "/investment-plan",
+      path: "/independent-isa",
       isActive: true,
     },
     {
       name: "Funds offers",
-      path: "/funds-offers",
+      path: "/funds",
       isActive: false,
     },
     {
-      name: "Track investment",
-      path: "/track-investment",
+      name: "Investments",
+      path: "/investments",
       isActive: false,
     },
     {
@@ -23,7 +24,7 @@ function SidebarItems() {
     },
     {
       name: "Upgrade plans",
-      path: "/upgrade-plans",
+      path: "/plans",
       isActive: false,
     },
     {
@@ -33,14 +34,9 @@ function SidebarItems() {
     },
   ];
 
-  const itemStyle = (status) => ({
-    backgroundColor: status ? "var(--primary-100)" : "",
-    color: status ? "var(--bg-color-100)" : "",
+  const itemStyle = () => ({
     width: "11em",
     padding: "1rem",
-    borderRadius: "var(--border-radius-sm)",
-    textAlign: "start",
-    fontWeight: "600",
   });
   return (
     <nav className="nav">
@@ -48,7 +44,13 @@ function SidebarItems() {
         {menus.map((menu) => {
           return (
             <li style={itemStyle(menu.isActive)} key={menu.path}>
-              <span>{menu.name}</span>
+              <Link
+                to={menu.path}
+                style={{ textDecoration: "none" }}
+                className="text fw-bold"
+              >
+                {menu.name}
+              </Link>
             </li>
           );
         })}

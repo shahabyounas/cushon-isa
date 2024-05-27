@@ -1,26 +1,65 @@
 import { createBrowserRouter, RouterProvider, Route, Link } from "react-router-dom"
 import AppLayout from './app/hoc/layout/appLayout'
 import HomePage from "./app/pages/homepage"
-import './App.css'
+import ComingSoon from "./app/pages/comingSoonPage"
 import IndependentISAPage from "./app/pages/independentISAPage"
+import './App.css'
+
+
+function AppLevelHOC(children, show = true){
+  if(!show){
+    return children
+  }
+  return <AppLayout>
+    {children}
+  </AppLayout>
+}
+
+
+function LayoutHOC(children, layout = "app"){
+  switch(layout){
+    case "app":
+      return AppLevelHOC(children);
+    default: 
+      return children;
+  }
+}
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: LayoutHOC(<HomePage />),
   },
   {
     path: '/independent-isa',
-    element: <IndependentISAPage />
-  }
-])
-function App() {
+    element: LayoutHOC(<IndependentISAPage />)
+  },
+  {
+    path: '/funds',
+    element: LayoutHOC(<ComingSoon name="funds" />),
+  },
+  {
+    path: '/investments',
+    element: LayoutHOC(<ComingSoon name="investments" />),
+  },
+  {
+    path: '/settings',
+    element: LayoutHOC(<ComingSoon name="settings" />),
+  },
+  {
+    path: '/plans',
+    element: LayoutHOC(<ComingSoon name="plans" />),
+  },
+  {
+    path: '/summary',
+    element: LayoutHOC(<ComingSoon name="summary" />),
+  },
+], {
+  basename: import.meta.env.BASE_URL
+})
 
-  return (
-    <AppLayout>
-      <RouterProvider router={router} />
-    </AppLayout>
-  )
+function App() {
+  return <RouterProvider router={router} />
 }
 
 export default App

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function PaymentConfirmModal(props) {
 
   return (
@@ -14,7 +12,7 @@ function PaymentConfirmModal(props) {
         className="form-control"
         id="cAmount"
         name="cAmount"
-        placeholder={`Re-enter amount ${props.amount}`}
+        placeholder="Re-enter amount"
       />
     </div>
   );

@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { toast } from 'react-toastify'
 import Card from "../../components/card/Card";
 import Toast from "../../components/toast";
@@ -26,8 +25,8 @@ function IndependentISAPage() {
     setIsModalOpen(false)
   }
 
-  function onConfirm(data){
-    console.log("confirm===")
+  function onConfirm(){
+    // Call the database
   }
 
   function handleFormChange(e){
@@ -102,11 +101,9 @@ function IndependentISAPage() {
 
           <div className="align-self-end mt-3">
           <div className={styles.in_card_button_wrapper}>
-            <Link>
               <button type="button" onClick={handleOpenModal} className={`btn ${styles.in_card_button}`}>
                 Confirm Payment
               </button>
-            </Link>
           </div>
         </div>
         </div>
