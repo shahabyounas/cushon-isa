@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Route, Link } from "react-router-dom"
+import { createBrowserRouter, RouterProvider, Route, Link, Outlet, Navigate } from "react-router-dom"
 import AppLayout from './app/hoc/layout/appLayout'
 import HomePage from "./app/pages/homepage"
 import ComingSoon from "./app/pages/comingSoonPage"
@@ -31,29 +31,37 @@ const router = createBrowserRouter([
     element: LayoutHOC(<HomePage />),
   },
   {
-    path: '/independent-isa',
-    element: LayoutHOC(<IndependentISAPage />)
+    path: 'independent-isa',
+    element: LayoutHOC(<HomePage />),
   },
   {
-    path: '/funds',
+    path:'independent-isa-detail',
+    element: LayoutHOC(<IndependentISAPage />),
+  },
+  {
+    path: 'funds',
     element: LayoutHOC(<ComingSoon name="funds" />),
   },
   {
-    path: '/investments',
+    path: 'investments',
     element: LayoutHOC(<ComingSoon name="investments" />),
   },
   {
-    path: '/settings',
+    path: 'settings',
     element: LayoutHOC(<ComingSoon name="settings" />),
   },
   {
-    path: '/plans',
+    path: 'plans',
     element: LayoutHOC(<ComingSoon name="plans" />),
   },
   {
-    path: '/summary',
+    path: 'summary',
     element: LayoutHOC(<ComingSoon name="summary" />),
   },
+  {
+    path: '*',
+    element: <ComingSoon name="404" />
+  }
 ], {
   basename: import.meta.env.BASE_URL
 })

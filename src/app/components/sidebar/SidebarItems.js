@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styles from "./sidebaritems.module.css";
 function SidebarItems() {
+  const { pathname } = useLocation();
   const menus = [
     {
       name: "Investment plans",
@@ -44,13 +45,19 @@ function SidebarItems() {
         {menus.map((menu) => {
           return (
             <li style={itemStyle(menu.isActive)} key={menu.path}>
-              <Link
+              <NavLink
                 to={menu.path}
                 style={{ textDecoration: "none" }}
-                className="text fw-bold"
+                className={({ isActive }) => 
+                  [
+                    isActive ? "text-active" : "",
+                    "text",
+                    "fw-bold"
+                  ].join(" ")
+                }
               >
                 {menu.name}
-              </Link>
+              </NavLink>
             </li>
           );
         })}

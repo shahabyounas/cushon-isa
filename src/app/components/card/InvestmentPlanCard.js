@@ -7,7 +7,7 @@ function InvestmentPlanCard(props) {
       <h4> {props.title} </h4>
       <div className={styles.card_description}>
         <p> {props.description} </p>
-        <span> {props.icon} </span>
+        <p> {props.icon} </p>
       </div>
       <div className={styles.in_card_button_wrapper}>
         <Link to={props.detailsPath}>

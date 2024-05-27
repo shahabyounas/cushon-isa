@@ -72,6 +72,10 @@ button:focus-visible {
   color: black;
 }
 
+.text-active {
+  color: var(--primary-100);
+}
+
 .text:hover {
   color: var(--primary-100);
 }
