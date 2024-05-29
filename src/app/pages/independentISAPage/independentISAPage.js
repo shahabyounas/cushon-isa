@@ -7,6 +7,7 @@ import PaymentConfirmModal from "../../components/modal/PaymentConfirmModal";
 import { SearchDropDown } from "../../components/dropdown";
 import Modal from "../../components/modal";
 import styles from "./independentisapage.module.css";
+import { useISAForm } from "./hooks/useISAForm";
 
 
 const MAX_INVESTMENT_FUNDS = 1
@@ -16,23 +17,57 @@ const FUND_ALREADY_SELECTED = "Please choose a different fund"
 function IndependentISAPage() {
   const [funds, setFunds] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [formData, setFormData] = useState({ amount: 0, fund: null})
-  function handleOpenModal(){
-    setIsModalOpen(true)
-  }
+  const [confirmBtnDisabled, setConfirmBtnDisabled] = useState(true)
+  const {
+    state: formData , 
+    eventHandler: handleFormChange, 
+    updateStateHandler} = useISAForm({ amount: 0, fund: null})
 
   function handleCloseModal(){
     setIsModalOpen(false)
   }
 
-  function onConfirm(){
-    // Call the database
+  function validate(data, requiredKeys = []){
+
+    let isValid = true;
+
+
+    const keys = Object.keys(data).filter((key) => requiredKeys.includes(key))
+
+    let missingKeys= []
+
+    keys.forEach((field) => {
+      if(!formData[field]){
+        missingKeys.push(field)
+      }
+    })
+
+    if(missingKeys.length){
+      isValid = false
+    }
+
+    return {
+      isValid, 
+      missingKeys
+    }
   }
+  function handleOnConfirm(data){
 
-  function handleFormChange(e){
-    e.preventDefault()
+    const validateForm = validate(formData, ['fund', 'amount'])
 
-    setFormData(pre => ({ ...pre, [e.target.name] : e.target.value }))
+    if(!validateForm.isValid){
+       toast.error(`The require field(s) ${validateForm.missingKeys.join(",")} missing`)
+       return
+    }
+
+    if(data.cAmount != formData.amount){
+      toast.error('Please enter the correct investment amount')
+      return
+    }else {
+      setConfirmBtnDisabled(false)
+    }
+
+    setIsModalOpen(true)
   }
 
 
@@ -47,7 +82,7 @@ function IndependentISAPage() {
       return
     }
 
-    setFormData(pre => ({ ...pre, fund }))
+    updateStateHandler(fund)
     setFunds([fund])
   }
 
@@ -56,7 +91,8 @@ function IndependentISAPage() {
       <Modal 
         open={isModalOpen}
         onClose={handleCloseModal}
-        onConfirm={onConfirm}
+        onConfirm={handleOnConfirm}
+        confirmBtnDisabled={confirmBtnDisabled}
         >
           <PaymentConfirmModal amount={formData.amount} />
       </Modal>
@@ -101,7 +137,7 @@ function IndependentISAPage() {
 
           <div className="align-self-end mt-3">
           <div className={styles.in_card_button_wrapper}>
-              <button type="button" onClick={handleOpenModal} className={`btn ${styles.in_card_button}`}>
+              <button type="button" onClick={handleOnConfirm} className={`btn ${styles.in_card_button}`}>
                 Confirm Payment
               </button>
           </div>

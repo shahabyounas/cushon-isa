@@ -20,7 +20,7 @@ function LayoutHOC(children, layout = "app"){
   switch(layout){
     case "app":
       return AppLevelHOC(children);
-    default: 
+    default:
       return children;
   }
 }
