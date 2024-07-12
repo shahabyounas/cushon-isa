@@ -24,7 +24,7 @@ function HomePage() {
       description: "Be the part of amazing pension scheme with your employer",
       icon: null,
       detailsPath: "#",
-    }
+    },
   ];
   return (
     <Container>

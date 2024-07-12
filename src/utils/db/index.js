@@ -1,5 +1,3 @@
-import { Database } from './database'
+import { Database } from "./database";
 
-export {
-    Database
-}
+export { Database };
